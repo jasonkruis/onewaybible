@@ -1,27 +1,51 @@
 ---
 layout: base.njk
 ---
-<section class="hero hero--home">
-  <div class="wrap wrap--wide">
-    <p class="hero__eyebrow">One way &nbsp;&rarr;</p>
-    <h1 class="hero__title">Understand the Bible on the Bible&rsquo;s terms.</h1>
-    <p class="hero__lede">Meaning runs one direction &mdash; from the Author, through
-      the text, to you. Not something we <em>build</em> onto Scripture, but something
-      we <em>receive</em> from it. Browse the library by topic below.</p>
-  </div>
-</section>
+{% set current = topics[0] %}
+<div class="library">
+  <div class="wrap wrap--wide library__inner">
 
-<section class="wrap wrap--wide">
-  <p class="label">The Library</p>
-  <ul class="topicgrid">
-    {% for t in topics %}
-    <li class="topicgrid__item">
-      <a class="topicgrid__link" href="/topics/{{ t.slug }}/">
-        <span class="topicgrid__name">{{ t.name }}</span>
-        {% if t.blurb %}<span class="topicgrid__blurb">{{ t.blurb }}</span>{% endif %}
-        <span class="topicgrid__count">{{ collections.resources | countForTopic(t.slug) }} {{ "resource" if (collections.resources | countForTopic(t.slug)) == 1 else "resources" }}</span>
-      </a>
-    </li>
-    {% endfor %}
-  </ul>
-</section>
+    <nav class="rail" aria-label="Topics">
+      <p class="rail__label">Topics</p>
+      <ul class="rail__list">
+        {% for t in topics %}
+        <li>
+          <a class="rail__link {% if loop.first %}is-current{% endif %}"
+             href="/topics/{{ t.slug }}/"
+             {% if loop.first %}aria-current="page"{% endif %}>
+            <span class="rail__name">{{ t.name }}</span>
+            <span class="rail__count">{{ collections.resources | countForTopic(t.slug) }}</span>
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </nav>
+
+    <section class="panel" aria-label="Welcome and {{ current.name }}">
+      <div class="welcome">
+        <p class="hero__eyebrow">One way &nbsp;&rarr;</p>
+        <h1 class="welcome__title">Understand the Bible on the Bible&rsquo;s terms.</h1>
+        <p class="welcome__lede">Meaning runs one direction &mdash; from the Author,
+          through the text, to you. Browse the library by topic on the left.</p>
+      </div>
+
+      <header class="panel__head panel__head--home">
+        <h2 class="panel__title">{{ current.name }}</h2>
+        {% if current.blurb %}<p class="panel__blurb">{{ current.blurb }}</p>{% endif %}
+      </header>
+
+      {% set groups = collections.resources | resourcesForTopic(current.slug, types) %}
+      {% if groups.length %}
+        {% for group in groups %}
+        <div class="group">
+          <p class="group__label">{{ group.label }}</p>
+          {% include "reslist.njk" %}
+        </div>
+        {% endfor %}
+      {% else %}
+        <p class="panel__empty">Resources on this topic will appear as they&rsquo;re added.</p>
+      {% endif %}
+    </section>
+
+  </div>
+</div>

@@ -581,3 +581,74 @@ a:focus-visible, .skip:focus-visible {
 @media (max-width: 34rem) {
   .diagram__cell { grid-template-columns: 1fr; gap: 0.8rem; }
 }
+
+/* ---- home welcome (above first topic in panel) ------------------------- */
+.welcome {
+  padding-bottom: 1.6rem;
+  margin-bottom: 1.8rem;
+  border-bottom: 1px solid var(--paper-deep);
+}
+.welcome__title {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(1.8rem, 1.3rem + 2.4vw, 2.7rem);
+  line-height: 1.08;
+  letter-spacing: -0.012em;
+  margin: 0.6rem 0 0.8rem;
+  max-width: 16ch;
+}
+.welcome__lede { color: var(--ink); font-size: 1.08rem; max-width: 46ch; margin: 0; }
+.panel__head--home .panel__title { font-size: clamp(1.4rem, 1.1rem + 1.4vw, 1.9rem); }
+
+/* ---- tag chips (shared) ------------------------------------------------ */
+.tag {
+  display: inline-block;
+  font-family: var(--util);
+  font-size: 0.7rem;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  color: var(--muted);
+  border: 1px solid var(--paper-deep);
+  border-radius: 999px;
+  padding: 0.12rem 0.6rem;
+  margin: 0 0.3rem 0.3rem 0;
+  transition: color 0.12s ease, border-color 0.12s ease;
+}
+.tag:hover { color: var(--marker); border-color: var(--marker); }
+
+/* tags inside a resource listing */
+.reslist__tags { display: block; margin-top: 0.4rem; }
+
+/* ---- tag pages --------------------------------------------------------- */
+.tagpage { padding-block: clamp(2rem, 5vw, 3.2rem) 3rem; }
+.tagpage__head { margin-bottom: 1.8rem; }
+.reslist--tag .reslist__item { padding-block: 0.2rem; }
+.reslist__home {
+  font-family: var(--util);
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 0.15rem;
+}
+
+/* ---- filed footer: rows for topic + tags ------------------------------- */
+.filed { display: block; }
+.filed__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.7rem;
+}
+.filed__row:last-child { margin-bottom: 0; }
+.filed__tag--topic {
+  font-family: var(--util);
+  font-size: 0.78rem;
+  text-decoration: none;
+  color: var(--marker);
+  border: 1px solid var(--lane);
+  border-radius: 3px;
+  padding: 0.22rem 0.6rem;
+}
+.filed__tag--topic:hover { background: var(--sign); }

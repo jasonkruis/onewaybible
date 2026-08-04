@@ -12,7 +12,6 @@ eleventyComputed:
 <div class="library">
   <div class="wrap wrap--wide library__inner">
 
-    {# ---- Left rail: all topics ---- #}
     <nav class="rail" aria-label="Topics">
       <p class="rail__label">Topics</p>
       <ul class="rail__list">
@@ -29,7 +28,6 @@ eleventyComputed:
       </ul>
     </nav>
 
-    {# ---- Right panel: this topic's resources, grouped by type ---- #}
     <section class="panel" aria-label="{{ topic.name }} resources">
       <header class="panel__head">
         <h1 class="panel__title">{{ topic.name }}</h1>
@@ -41,25 +39,7 @@ eleventyComputed:
         {% for group in groups %}
         <div class="group">
           <p class="group__label">{{ group.label }}</p>
-          <ul class="reslist">
-            {% for item in group.items %}
-            <li class="reslist__item">
-              {% if item.data.type == "writing" or not item.data.type %}
-                <a class="reslist__link" href="{{ item.url }}">
-                  <span class="reslist__title">{{ item.data.title }}</span>
-                  {% if item.data.description %}<span class="reslist__blurb">{{ item.data.description }}</span>{% endif %}
-                </a>
-              {% else %}
-                {# audio / video / slides / graphic: link out or to the file #}
-                <a class="reslist__link" href="{{ item.data.link or item.url }}"
-                   {% if item.data.link %}target="_blank" rel="noopener"{% endif %}>
-                  <span class="reslist__title">{{ item.data.title }}</span>
-                  {% if item.data.description %}<span class="reslist__blurb">{{ item.data.description }}</span>{% endif %}
-                </a>
-              {% endif %}
-            </li>
-            {% endfor %}
-          </ul>
+          {% include "reslist.njk" %}
         </div>
         {% endfor %}
       {% else %}

@@ -1,0 +1,32 @@
+---
+layout: base.njk
+pagination:
+  data: collections.tagList
+  size: 1
+  alias: tag
+permalink: "/tags/{{ tag.slug }}/"
+eleventyComputed:
+  title: "Tagged: {{ tag.name }}"
+  description: "Resources tagged {{ tag.name }}."
+---
+<div class="wrap wrap--wide tagpage">
+  <a class="backlink" href="/">Library</a>
+  <header class="tagpage__head">
+    <p class="article__eyebrow">Tag</p>
+    <h1 class="article__title">{{ tag.name }}</h1>
+    <p class="panel__blurb">Everything tagged &ldquo;{{ tag.name }}&rdquo; &mdash; across all topics.</p>
+  </header>
+
+  {% set tagged = collections.resources | resourcesForTag(tag.slug) %}
+  <ul class="reslist reslist--tag">
+    {% for item in tagged %}
+    <li class="reslist__item">
+      <a class="reslist__link" href="{% if item.data.type and item.data.type != 'writing' and item.data.link %}{{ item.data.link }}{% else %}{{ item.url }}{% endif %}"{% if item.data.type and item.data.type != 'writing' and item.data.link %} target="_blank" rel="noopener"{% endif %}>
+        <span class="reslist__title">{{ item.data.title }}</span>
+        {% if item.data.description %}<span class="reslist__blurb">{{ item.data.description }}</span>{% endif %}
+        <span class="reslist__home">in {{ item.data.topic }}</span>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+</div>

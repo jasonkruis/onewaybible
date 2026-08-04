@@ -14,13 +14,21 @@ layout: base.njk
       {{ content | safe }}
     </div>
 
-    {% if topics %}
     <footer class="filed">
-      <span class="filed__label">Filed under</span>
-      {% for t in topics %}
-        <a class="filed__tag" href="/topics/{{ t | slug }}/">{{ t }}</a>
-      {% endfor %}
+      {% if topic %}
+      <span class="filed__row">
+        <span class="filed__label">Topic</span>
+        <a class="filed__tag filed__tag--topic" href="/topics/{{ topic | slug }}/">{{ topic }}</a>
+      </span>
+      {% endif %}
+      {% if tags %}
+      <span class="filed__row">
+        <span class="filed__label">Tags</span>
+        {% for t in tags %}
+          <a class="tag" href="/tags/{{ t | slug }}/">{{ t }}</a>
+        {% endfor %}
+      </span>
+      {% endif %}
     </footer>
-    {% endif %}
   </div>
 </article>

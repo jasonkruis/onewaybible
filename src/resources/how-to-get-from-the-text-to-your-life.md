@@ -1,8 +1,9 @@
 ---
 layout: article.njk
 type: writing
-topics: [Reading the Bible, Pastoral]
-order: 2
+topic: Reading the Bible
+tags: [Pastoral, Application, Overlap Model, Preaching]
+order: 1
 title: How to Get From the Text to Your Life
 description: Most of us were taught to build a bridge from an ancient text to today. There's a better way — and it starts by noticing the text was already reaching for you.
 eyebrow: Reading the Bible

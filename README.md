@@ -10,12 +10,14 @@ site is portable text files you own.
 ## The mental model
 
 - Every piece of content is a **resource** — one file in `src/resources/`.
-- Each resource is tagged with a **type** (writing / audio / video / slides / graphic)
-  and one or more **topics**.
-- **Topic pages build themselves**: each topic automatically gathers every resource
-  tagged with it and groups them by type. One resource can appear under several
-  topics without being duplicated.
-- You **add** a resource file, **build**, and **deploy**. A few times a year.
+- Each resource has ONE home **topic** (where it's filed and where it appears in
+  the library) and, optionally, several **tags** (a separate cross-reference layer).
+- **Topics** are the fixed list in the left rail. A resource lives under exactly one.
+- **Tags** don't affect filing. They let a reader click a subject and find every
+  resource sharing it, across all topics. Each tag gets its own page automatically.
+- Within a topic, resources are grouped by **type** (writing, audio, video, slides,
+  graphic) and ordered by a priority number you set.
+- You **add** a resource file, **build**, and **deploy** (`git push`).
 
 ---
 
@@ -50,23 +52,25 @@ To build the finished site: `npm run build` (creates the `_site/` folder).
    ---
    layout: article.njk
    type: writing
-   topics: [Reading the Bible, The Law]
+   topic: The Law
+   tags: [Reading the Bible, Leviticus 18:5, Law and Grace]
    order: 1
    title: Your Title Here
    description: One sentence for the topic-page listing.
-   eyebrow: Reading the Bible
+   eyebrow: The Law
    ---
    ```
    - `type` — always `writing` for an article.
-   - `topics` — one or more, in square brackets, comma-separated. **Must match the
-     topic names in `src/_data/topics.json`** (see below). Appears under each one.
-   - `order` — a priority number that controls the order it appears in, within its
-     topic-and-type group. **Lower numbers come first** (`order: 1` at the top).
-     Anything with no `order` sinks to the bottom (alphabetically). The same number
-     applies everywhere the resource appears. Dates are not used for ordering.
+   - `topic` — the ONE home topic. **Must match a topic name in
+     `src/_data/topics.json`.** This determines where the resource is filed.
+   - `tags` — optional, in square brackets, comma-separated. A separate
+     cross-reference layer: each tag gets its own page listing everything that
+     shares it, across all topics. Tags do NOT change where the resource is filed.
+     A tag can be anything — another topic's name, a book of the Bible, a theme.
+   - `order` — priority within its topic-and-type group. Lower first. No `order`
+     sinks to the bottom.
    - `title`, `description` — as before.
-   - `date` — optional; kept in the file for your reference but not displayed and
-     not used for ordering. You can leave it out.
+   - `date` — optional; not displayed, not used for ordering. Can be omitted.
 3. Write the article in Markdown below the block. `## Heading`, blank lines between
    paragraphs, `*italic*`, `**bold**`, `> blockquote`. For a small Scripture
    reference: `<span class="ref">(Romans 10:8)</span>`.

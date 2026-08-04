@@ -1,0 +1,15 @@
+<ul class="reslist">
+{% for item in group.items %}
+  <li class="reslist__item">
+    <a class="reslist__link" href="{% if item.data.type and item.data.type != 'writing' and item.data.link %}{{ item.data.link }}{% else %}{{ item.url }}{% endif %}"{% if item.data.type and item.data.type != 'writing' and item.data.link %} target="_blank" rel="noopener"{% endif %}>
+      <span class="reslist__title">{{ item.data.title }}</span>
+      {% if item.data.description %}<span class="reslist__blurb">{{ item.data.description }}</span>{% endif %}
+    </a>
+    {% if item.data.tags %}
+    <span class="reslist__tags">
+      {% for tag in item.data.tags %}<a class="tag" href="/tags/{{ tag | slug }}/">{{ tag }}</a>{% endfor %}
+    </span>
+    {% endif %}
+  </li>
+{% endfor %}
+</ul>

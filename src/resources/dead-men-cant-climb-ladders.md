@@ -1,11 +1,12 @@
 ---
 layout: article.njk
 type: writing
-topics: [Reading the Bible, The Law, The Gospel]
+topic: The Law
+tags: [Reading the Bible, The Gospel, Leviticus 18:5, Law and Grace]
 order: 1
 title: God Knows Dead Men Can’t Climb Ladders
 description: Why the law was never a ladder to climb — and what that means for how you read the whole Bible.
-eyebrow: Reading the Bible
+eyebrow: The Law
 date: 2026-06-15
 ---
 
