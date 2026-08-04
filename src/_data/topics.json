@@ -1,0 +1,27 @@
+[
+  {
+    "slug": "reading-the-bible",
+    "name": "Reading the Bible",
+    "blurb": "How Scripture is meant to be read — on its own terms."
+  },
+  {
+    "slug": "the-law",
+    "name": "The Law",
+    "blurb": "The law, the commandments, and life with God."
+  },
+  {
+    "slug": "the-gospel",
+    "name": "The Gospel",
+    "blurb": "The good news at the center of the whole Bible."
+  },
+  {
+    "slug": "assurance",
+    "name": "Assurance",
+    "blurb": "Knowing where you stand with God — and how you know it."
+  },
+  {
+    "slug": "pastoral",
+    "name": "Pastoral",
+    "blurb": "Wisdom for the Christian life and the care of souls."
+  }
+]

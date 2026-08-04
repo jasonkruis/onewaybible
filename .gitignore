@@ -1,0 +1,6 @@
+node_modules/
+_site/
+*.preview.html
+*.png
+shot.py
+shot2.py

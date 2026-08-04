@@ -1,0 +1,27 @@
+---
+layout: base.njk
+---
+<section class="hero hero--home">
+  <div class="wrap wrap--wide">
+    <p class="hero__eyebrow">One way &nbsp;&rarr;</p>
+    <h1 class="hero__title">Understand the Bible on the Bible&rsquo;s terms.</h1>
+    <p class="hero__lede">Meaning runs one direction &mdash; from the Author, through
+      the text, to you. Not something we <em>build</em> onto Scripture, but something
+      we <em>receive</em> from it. Browse the library by topic below.</p>
+  </div>
+</section>
+
+<section class="wrap wrap--wide">
+  <p class="label">The Library</p>
+  <ul class="topicgrid">
+    {% for t in topics %}
+    <li class="topicgrid__item">
+      <a class="topicgrid__link" href="/topics/{{ t.slug }}/">
+        <span class="topicgrid__name">{{ t.name }}</span>
+        {% if t.blurb %}<span class="topicgrid__blurb">{{ t.blurb }}</span>{% endif %}
+        <span class="topicgrid__count">{{ collections.resources | countForTopic(t.slug) }} {{ "resource" if (collections.resources | countForTopic(t.slug)) == 1 else "resources" }}</span>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+</section>

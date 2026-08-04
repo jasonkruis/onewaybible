@@ -1,0 +1,14 @@
+{
+  "name": "onewaybible",
+  "version": "1.0.0",
+  "description": "One Way Bible — understand the Bible on the Bible's terms.",
+  "scripts": {
+    "build": "eleventy",
+    "serve": "eleventy --serve",
+    "start": "eleventy --serve"
+  },
+  "license": "CC-BY-NC-4.0",
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0"
+  }
+}

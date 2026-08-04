@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if title %}{{ title }} · {{ site.title }}{% else %}{{ site.title }} · {{ site.tagline }}{% endif %}</title>
+  <meta name="description" content="{% if description %}{{ description }}{% else %}{{ site.tagline }}{% endif %}">
+  <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="masthead">
+    <div class="wrap wrap--wide masthead__bar">
+      <div class="masthead__brand">
+        <span class="mark" aria-hidden="true">
+          <span class="mark__text">One Way</span>
+          <span class="mark__arrow"></span>
+        </span>
+        <span class="masthead__titles">
+          <a class="masthead__name" href="/">{{ site.title }}</a>
+          <span class="masthead__tag">{{ site.tagline }}</span>
+        </span>
+      </div>
+      <nav class="masthead__nav" aria-label="Primary">
+        <a href="/">Library</a>
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    {{ content | safe }}
+  </main>
+
+  <footer class="foot">
+    <div class="wrap wrap--wide">
+      <p>{{ site.title }} — {{ site.tagline }}</p>
+      <p>Written by {{ site.author }}. Shared freely under
+        <a href="{{ site.licenseUrl }}" rel="license">{{ site.license }}</a>
+        — copy and redistribute for non-commercial use, with attribution.</p>
+    </div>
+  </footer>
+</body>
+</html>

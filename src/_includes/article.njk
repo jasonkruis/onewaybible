@@ -1,0 +1,26 @@
+---
+layout: base.njk
+---
+<article class="article">
+  <div class="wrap">
+    <a class="backlink" href="/">Library</a>
+
+    <header class="article__head">
+      {% if eyebrow %}<p class="article__eyebrow">{{ eyebrow }}</p>{% endif %}
+      <h1 class="article__title">{{ title }}</h1>
+    </header>
+
+    <div class="prose">
+      {{ content | safe }}
+    </div>
+
+    {% if topics %}
+    <footer class="filed">
+      <span class="filed__label">Filed under</span>
+      {% for t in topics %}
+        <a class="filed__tag" href="/topics/{{ t | slug }}/">{{ t }}</a>
+      {% endfor %}
+    </footer>
+    {% endif %}
+  </div>
+</article>
