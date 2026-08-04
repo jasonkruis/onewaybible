@@ -1,16 +1,6 @@
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/assets");
 
-  eleventyConfig.addFilter("readableDate", (dateObj) => {
-    if (!dateObj) return "";
-    const d = new Date(dateObj);
-    const months = [
-      "January", "February", "March", "April", "May", "June",
-      "July", "August", "September", "October", "November", "December",
-    ];
-    return `${months[d.getUTCMonth()]} ${d.getUTCDate()}, ${d.getUTCFullYear()}`;
-  });
-
   const slug = (s) =>
     String(s)
       .toLowerCase()
@@ -20,8 +10,6 @@ module.exports = function (eleventyConfig) {
       .replace(/^-+|-+$/g, "");
   eleventyConfig.addFilter("slug", slug);
 
-  // Sort helper: by priority (order) ascending; missing order sinks to the
-  // bottom; ties broken alphabetically by title. No dependence on dates.
   const byPriority = (a, b) => {
     const ao = a.data.order == null ? Infinity : a.data.order;
     const bo = b.data.order == null ? Infinity : b.data.order;
@@ -34,10 +22,7 @@ module.exports = function (eleventyConfig) {
   });
 
   eleventyConfig.addFilter("resourcesForTopic", function (allResources, topicSlug, typeOrder) {
-    const inTopic = allResources.filter((r) => {
-      const topics = (r.data.topics || []).map(slug);
-      return topics.includes(topicSlug);
-    });
+    const inTopic = allResources.filter((r) => slug(r.data.topic || "") === topicSlug);
     const groups = [];
     for (const t of typeOrder) {
       const items = inTopic
@@ -49,9 +34,25 @@ module.exports = function (eleventyConfig) {
   });
 
   eleventyConfig.addFilter("countForTopic", function (allResources, topicSlug) {
-    return allResources.filter((r) =>
-      (r.data.topics || []).map(slug).includes(topicSlug)
-    ).length;
+    return allResources.filter((r) => slug(r.data.topic || "") === topicSlug).length;
+  });
+
+  eleventyConfig.addCollection("tagList", (api) => {
+    const tags = new Map();
+    api.getFilteredByGlob("src/resources/*.md").forEach((r) => {
+      (r.data.tags || []).forEach((t) => {
+        tags.set(slug(t), t);
+      });
+    });
+    return Array.from(tags, ([tagSlug, name]) => ({ slug: tagSlug, name })).sort(
+      (a, b) => a.name.localeCompare(b.name)
+    );
+  });
+
+  eleventyConfig.addFilter("resourcesForTag", function (allResources, tagSlug) {
+    return allResources
+      .filter((r) => (r.data.tags || []).map(slug).includes(tagSlug))
+      .sort(byPriority);
   });
 
   return {
